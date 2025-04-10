@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: auto;
+}
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+html {
+    margin: 0;
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+}
+body {
+    margin: 0;
+    position: relative;
+    background-color: var(--color-bkg);
+    overflow-x: hidden;
+    
+}
+button, p, h1, h2, h3, h4, h5, h6, ul, li{
+    margin: 0;
+    height: auto;
+}
+a{
+    color: var(--color-text);
+}
+.cta-container{
+    background-color: var(--color-cta-bkg);
+    border-radius: var(--border-radius);
+    padding: var(--padding-general);
+}
+
+:root{
+    /* 
+        * 
+        * COLORS
+        *
+    */
+    --color-bkg: #131313;
+    --color-cta-bkg: #514099;
+    --color-text: #ffffff;
+
+    /* 
+        * 
+        * GAPS
+        *
+    */
+    --gap-general: clamp(0.5rem, 0.5vw, 1.2rem); 
+    --gap-nav-content: clamp(0.3rem, 3vw, 4rem); 
+
+    /* 
+        * 
+        * PADDINGS
+        *
+    */
+    --padding-inline-page: clamp(1rem, 2vw, 2rem);
+    --padding-block-general: clamp(1rem, 1vw, 2rem);
+    --padding-general: 
+        clamp(0.5rem, 0.8vw, 2rem)
+        clamp(0.5rem, 0.8vw, 2rem)
+        clamp(0.5rem, 0.8vw, 2rem)
+        clamp(0.5rem, 0.8vw, 2rem)
+    ;
+
+    /* 
+        * 
+        * MISC
+        *
+    */
+    --border-radius: clamp(1rem, 2vw, 2rem);
+
+    /* 
+        * 
+        * FONT SIZES
+        *
+    */
+    --font-size-h1: clamp(2.5rem, 5vw, 10rem);
+    --font-size-h2: clamp(1rem, 2vw, 5rem);
+    --font-size-h3: clamp(3.5rem, 5vw, 10rem);
+    --font-size-h4: clamp(2rem, 3.1vw, 6rem);
+    --font-size-h5: clamp(1.2rem, 2.8vw, 5rem);
+    --font-size-nav: clamp(1.5rem, 1.7vw, 6rem);
+
+    /* 
+        * 
+        * FONT WEIGHT
+        *
+    */
+    --font-weight-nav: 500;
+
+    /* 
+        * 
+        * FONT FAMILY
+        *
+    */
+    --font-family-konkhmer-stelokchher: "Konkhmer Stelokchher", san-serif; 
+    --font-family-montserrat: "Montserrat", san-serif;
+    --font-family-roboto: "Roboto", san-serif;
+}
