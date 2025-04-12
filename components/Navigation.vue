@@ -31,12 +31,19 @@ import Panda from '~/assets/imgs/svgs/panda.svg'
 </script>
 
 <style scoped>
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-inline: var(--padding-inline-page);
+    padding-block: var(--padding-block-general);
+    z-index: 10000000;
+}
 
 nav {
     display: flex;
     justify-content: space-between;
-    padding-inline: var(--padding-inline-page);
-    padding-block: var(--padding-block-general);
 }
 nav a {
     font-size: var(--font-size-nav);
