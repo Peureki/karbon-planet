@@ -1,12 +1,12 @@
 <template>
-    <NuxtLink v-if="nav" :to="`/${to}`" class="cta-container">
-        <span class="cta-content">
+    <NuxtLink v-if="nav" :to="`/${to}`" class="nav-cta-container">
+        <span class="nav-cta-content">
             <p>{{ text }}</p>
             <img :src="src" :alt="alt" :title="title">
         </span>    
     </NuxtLink>
 
-    <a v-else :href="to" class="cta-container">
+    <a v-else :href="to" target="_blank" class="cta-container">
         <span class="cta-content">
             <p>{{ text }}</p>
             <img :src="src" :alt="alt" :title="title">
@@ -31,6 +31,26 @@ const props = defineProps({
 </script>
 
 <style scoped>
+.nav-cta-content{
+    display: flex;
+    align-items: center;
+    gap: var(--gap-general);
+    border-radius: var(--border-radius);
+    padding-inline: var(--padding-inline-page);
+    background-color: var(--color-cta-bkg);
+}
+.nav-cta-content > p{
+    font-family: var(--font-family-montserrat);
+    font-size: var(--font-size-nav);
+    font-weight: var(--font-weight-cta);
+}
+.nav-cta-content > img{
+    width: var(--font-size-cta);
+}
+.cta-container{
+    width: fit-content;
+}
+
 .cta-content{
     display: flex;
     align-items: center;

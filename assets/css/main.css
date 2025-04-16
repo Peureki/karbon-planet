@@ -19,22 +19,107 @@ body {
     margin: 0;
     position: relative;
     background-color: var(--color-bkg);
-    overflow-x: hidden;
 }
 button, p, h1, h2, h3, h4, h5, h6, ul, li{
     margin: 0;
     height: auto;
 }
-a{
+h1{
+    font-family: var(--font-family-konkhmer-sleokchher);
+    font-weight: var(--font-weight-h1);
+    font-size: var(--font-size-h1);
+    color: var(--color-title);
+    line-height: var(--line-height-h1);
+    white-space: nowrap;
+    word-spacing: var(--word-spacing-h1);
+}
+h2{
+    font-family: var(--font-family-konkhmer-sleokchher);
+    font-weight: var(--font-weight-h2);
+    font-size: var(--font-size-h2);
+    color: var(--color-title);
+}
+h3{
+    font-family: var(--font-family-montserrat);
+    font-weight: var(--font-weight-h3);
+    font-size: var(--font-size-h3);
     color: var(--color-text);
 }
+p{
+    font-family: var(--font-family-roboto);
+    font-weight: var(--font-weight-p);
+    font-size: var(--font-size-p);
+    color: var(--color-text);
+    line-height: var(--line-height-p);
+}
+a{
+    color: var(--color-text);
+    cursor: pointer;
+}
 section{
+    position: relative;
     padding-inline: var(--padding-inline-page);
 }
 .cta-container{
     background-color: var(--color-cta-bkg);
     border-radius: var(--border-radius);
-    padding: var(--padding-general);
+    padding: var(--padding-cta);
+}
+.cta-content > p{
+    font-family: var(--font-family-montserrat);
+    font-size: var(--font-size-cta);
+    font-weight: var(--font-weight-cta);
+}
+.cta-content > img{
+    width: var(--font-size-cta);
+}
+.curved-end-section-header{
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    z-index: 10000001;
+}
+.curved-end-section-header > path{
+    /* fill: var(--color-bkg-nav); */
+}
+.curved-end-section > path {
+    fill: var(--color-bkg);
+}
+.curved-end-section{
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    z-index: 10000000;
+}
+
+.title-container{
+    display: flex;
+    align-items: center;
+    gap: var(--gap-title);
+}
+.title-container svg{
+    width: calc(var(--font-size-h2) * 0.65);
+}
+
+/*
+    * DESCRIPTIONS
+*/
+.faded-description{
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-general);
+}
+.faded-description p{
+    color: var(--color-faded-text);
+}
+
+/*
+    * DYNAMIC CLASSES
+*/
+.upside-down{
+    transform: rotate(180deg);
 }
 
 :root{
@@ -44,9 +129,14 @@ section{
         *
     */
     --color-bkg: #131313;
+    --color-bkg-nav: #252525;
     --color-bkg-linear-gradient-1: linear-gradient(180deg, rgba(19,19,19,1) 0%, rgba(9,10,31,1) 100%);
+    --color-cta: #514099;
     --color-cta-bkg: #514099;
     --color-text: #ffffff;
+    --color-faded-text: #a8a8a8;
+    --color-title: #6CC49B;
+
 
     /* 
         * 
@@ -54,8 +144,10 @@ section{
         *
     */
     --gap-general: clamp(0.5rem, 0.5vw, 1.2rem); 
+    --gap-content: clamp(1.5rem, 2vw, 3rem);
+    --gap-section: clamp(3.125rem, 5vw, 6.5rem);
     --gap-nav-content: clamp(0.3rem, 3vw, 4rem); 
-
+    --gap-title: clamp(1rem, 3vw, 3rem);
     /* 
         * 
         * PADDINGS
@@ -63,52 +155,85 @@ section{
     */
     --padding-inline-page: clamp(1rem, 2vw, 2rem);
     --padding-block-general: clamp(1rem, 1vw, 2rem);
+    --padding-block-section: clamp(5.5rem, 10vw, 7.5rem);
+    /* For SECTIONS that have abs h2 titles */ 
+    --padding-top-section: calc((var(--padding-block-section) * 2) + var(--font-size-h2));
+    --padding-section-title: 
+        var(--padding-block-section)
+        var(--padding-inline-page)
+        0
+        var(--padding-inline-page)
+    ;
     --padding-general: 
         clamp(0.5rem, 0.8vw, 2rem)
         clamp(0.5rem, 0.8vw, 2rem)
         clamp(0.5rem, 0.8vw, 2rem)
         clamp(0.5rem, 0.8vw, 2rem)
     ;
-
+    --padding-nav:
+        clamp(0.4rem, 0.3vw, 0.85rem)
+        var(--padding-inline-page)
+        clamp(0.4rem, 0.3vw, 0.85rem)
+        var(--padding-inline-page)
+    ;
+    --padding-cta: 
+        clamp(0.7rem, 0.8vw, 2rem)
+        clamp(0.7rem, 1vw, 2.2rem)
+        clamp(0.7rem, 0.8vw, 2rem)
+        clamp(0.7rem, 1vw, 2.2rem)
+    ;
     /* 
         * 
         * WIDTHS
         *
     */
     --w-hero-logo: clamp(11rem, 20vw, 21.8rem);
-
+    --w-nav-logo: clamp(3rem, 1.7vw, 5rem);
+    --w-nav-icon: clamp(1.5rem, 1.5vw, 4.5rem);
+    --w-poster: clamp(10rem, 40vw, 38rem);
     /* 
         * 
-        * MISC
+        * LINE HEIGHT
         *
+    */
+    --line-height-h1: 1;
+    --line-height-p: 1.8;
+
+    /* 
+        * WORD SPACING
+    */
+    --word-spacing-h1: clamp(0.5rem, 1vw, 1.7rem); 
+
+    /* 
+        * MISC
     */
     --border-radius: clamp(1rem, 2vw, 2rem);
 
     /* 
-        * 
         * FONT SIZES
-        *
     */
-    --font-size-h1: clamp(2.5rem, 5vw, 10rem);
-    --font-size-h2: clamp(1rem, 2vw, 5rem);
-    --font-size-h3: clamp(3.5rem, 5vw, 10rem);
+    --font-size-h1: clamp(2.5rem, 6vw, 10rem);
+    --font-size-h2: clamp(3.5rem, 5vw, 8rem);
+    --font-size-h3: clamp(3rem, 4vw, 7rem);
     --font-size-h4: clamp(2rem, 3.1vw, 6rem);
     --font-size-h5: clamp(1.2rem, 2.8vw, 5rem);
-    --font-size-nav: clamp(1.5rem, 1.7vw, 6rem);
+    --font-size-p: clamp(1rem, 1.5vw, 2.18rem);
+    --font-size-cta: clamp(1.2rem, 1.3vw, 4rem);
+    --font-size-nav: clamp(1.2rem, 1.3vw, 4rem);
 
     /* 
-        * 
         * FONT WEIGHT
-        *
     */
+    --font-weight-h1: 600;
+    --font-weight-h2: 400;
+    --font-weight-h3: 500;
     --font-weight-nav: 500;
+    --font-weight-cta: 500;
 
     /* 
-        * 
         * FONT FAMILY
-        *
     */
-    --font-family-konkhmer-stelokchher: "Konkhmer Stelokchher", san-serif; 
+    --font-family-konkhmer-sleokchher: "Konkhmer Sleokchher", san-serif; 
     --font-family-montserrat: "Montserrat", san-serif;
     --font-family-roboto: "Roboto", san-serif;
 }

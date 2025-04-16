@@ -15,11 +15,14 @@
                     <img class="icon" :src="SoundCloud" alt="SoundCloud" title="SoundCloud">
                 </a>
                 
-                <CTA :nav="true" to="contact" text="Let's Chat" :src="Panda" alt="Contact" title="Let's Chat"/>
+                <CTA :nav="true" to="contact" text="Let's Vibe" :src="Panda" alt="Contact" title="Connect"/>
             </span>
-            
         </nav>
+
+        <CurvedEndSection class="curved-end-section-header"/>
     </header>
+
+    
 </template>
 
 <script setup lang="ts">
@@ -36,14 +39,16 @@ header{
     top: 0;
     left: 0;
     width: 100%;
-    padding-inline: var(--padding-inline-page);
-    padding-block: var(--padding-block-general);
-    z-index: 10000000;
+    /* background-color: var(--color-bkg-nav); */
+    z-index: 10000009;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
+    padding-inline: var(--padding-inline-page);
+    padding-block: var(--padding-block-nav);
+    padding: var(--padding-nav);
 }
 nav a {
     font-size: var(--font-size-nav);
@@ -55,13 +60,11 @@ nav a {
 }
 
 .logo{
-    width: var(--font-size-h1);
+    width: var(--w-nav-logo);
 }
 .icon{
-    width: var(--font-size-h2);
+    width: var(--w-nav-icon);
 }
-
-
 .link-container{
     display: flex;
     align-items: center;
