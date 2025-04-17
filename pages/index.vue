@@ -55,15 +55,15 @@
         </div>
 
         <div v-for="(event, index) in upcomingEvents" :key="index" class="event">
-            <img class="poster" :src="`http://localhost:8055/assets/${event.poster}`">
+            <img class="poster" :src="`http://localhost:8055/assets/${event.poster}`" :alt="event.name" :title="event.name">
             <div class="event-info">
                 <h3>{{ event.name }}</h3>
                 <span class="faded-description">
-                    <p>{{ event.date }}</p>
+                    <p>{{ formatDate(event.startDate) }}</p>
                     <p>{{ event.location }}</p>
                 </span>
                 <p>{{ event.description }}</p>
-                <CTA :text="event.link_text" :to="event.link" :src="Ticket" :alt="`Get tickets to the event: ${event.name}`" :title="`Get tickets to the event: ${event.name}`"/>
+                <CTA :text="event.linkText" :to="event.link" :src="Ticket" :alt="`Get tickets to the event: ${event.name}`" :title="`Get tickets to the event: ${event.name}`"/>
             </div>
         </div>
     </section>
@@ -164,13 +164,6 @@ h1{
 section.upcoming-events{
     min-height: 300dvh;
     background: var(--color-bkg-linear-gradient-1);
-}
-section.upcoming-events > .title-container{
-    /* position: sticky;
-    top: calc(var(--font-size-nav) + var(--padding-block-section)); 
-    left: 0;
-    z-index: 0; */
-    /* padding: var(--padding-section-title); */
 }
 .event{
     position: relative;
