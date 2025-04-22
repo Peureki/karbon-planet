@@ -31,12 +31,15 @@ const props = defineProps({
 </script>
 
 <style scoped>
+p {
+    line-height: var(--line-height-cta);
+}
 .nav-cta-content{
     display: flex;
     align-items: center;
     gap: var(--gap-general);
     border-radius: var(--border-radius);
-    padding-inline: var(--padding-inline-page);
+    padding: var(--padding-cta);
     background-color: var(--color-cta-bkg);
 }
 .nav-cta-content > p{

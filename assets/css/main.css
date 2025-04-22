@@ -131,6 +131,7 @@ section{
     --color-bkg: #131313;
     --color-bkg-nav: #252525;
     --color-bkg-linear-gradient-1: linear-gradient(180deg, rgba(19,19,19,1) 0%, rgba(9,10,31,1) 100%);
+    --color-bkg-linear-gradient-2: linear-gradient(180deg,rgba(9, 10, 31, 1) 0%, rgba(19, 19, 19, 1) 100%);
     --color-cta: #514099;
     --color-cta-bkg: #514099;
     --color-text: #ffffff;
@@ -153,7 +154,7 @@ section{
         * PADDINGS
         *
     */
-    --padding-inline-page: clamp(1rem, 2vw, 2rem);
+    --padding-inline-page: clamp(1rem, 3vw, 30rem);
     --padding-block-general: clamp(1rem, 1vw, 2rem);
     --padding-block-section: clamp(5.5rem, 10vw, 7.5rem);
     /* For SECTIONS that have abs h2 titles */ 
@@ -190,7 +191,8 @@ section{
     --w-hero-logo: clamp(11rem, 20vw, 21.8rem);
     --w-nav-logo: clamp(3rem, 1.7vw, 5rem);
     --w-nav-icon: clamp(1.5rem, 1.5vw, 4.5rem);
-    --w-poster: clamp(10rem, 40vw, 38rem);
+    --w-poster: clamp(10rem, 40vw, 50rem);
+    --w-event-description: clamp(21.8rem, 50vw, 100rem);
     /* 
         * 
         * LINE HEIGHT
@@ -198,7 +200,7 @@ section{
     */
     --line-height-h1: 1;
     --line-height-p: 1.8;
-
+    --line-height-cta: 1;
     /* 
         * WORD SPACING
     */

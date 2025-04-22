@@ -1,5 +1,10 @@
 <template>
 <main>
+    <!--
+        *
+        * HERO SECTION
+        *
+    -->
     <section class="hero">
         <h1>INDEPENDENT PROMOTER</h1>
 
@@ -62,9 +67,25 @@
                     <p>{{ formatDate(event.startDate) }}</p>
                     <p>{{ event.location }}</p>
                 </span>
-                <p>{{ event.description }}</p>
+                <p class="event-description">{{ event.description }}</p>
                 <CTA :text="event.linkText" :to="event.link" :src="Ticket" :alt="`Get tickets to the event: ${event.name}`" :title="`Get tickets to the event: ${event.name}`"/>
             </div>
+        </div>
+    </section>
+
+    <!--
+        *
+        * PAST EVENTS SECTION
+        *
+    -->
+    <section class="past-events">
+        <div class="title-container">
+            <h2>PAST EVENTS</h2>
+
+            <svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 39C27.6167 39 39 28.0125 39 1.5C39 28.0125 50.3042 39 76.5 39C50.3042 39 39 50.3042 39 76.5C39 50.3042 27.6167 39 1.5 39Z" fill="var(--color-title)" stroke="var(--color-title)" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+
         </div>
     </section>
 </main>
@@ -94,7 +115,19 @@ const { data: upcomingEvents } = await useAsyncData('upcoming_events', () => {
   return $directus.request($readItems('upcoming_events'))
 })
 
+const { data: pastEvents } = await useAsyncData('past_events', () => {
+    return $directus.request($readItems('past_events'));
+})
+
+const { data: collage } = await useAsyncData('past_events_files', () => {
+    return $directus.request($readItems('past_events_files'));
+})
+
+
+
 console.log('upcoming events:', upcomingEvents.value);
+console.log('past events: ', pastEvents.value);
+console.log('past event collage: ', collage.value);
 
 </script>
 
@@ -162,7 +195,6 @@ h1{
     * EVENTS
 */
 section.upcoming-events{
-    min-height: 300dvh;
     background: var(--color-bkg-linear-gradient-1);
 }
 .event{
@@ -182,6 +214,15 @@ img.poster{
     display: flex;
     flex-direction: column;
     gap: var(--gap-content);
+}
+.event-description{
+    width: var(--w-event-description);
+}
+/*
+    * PAST EVENTS
+*/
+section.past-events{
+    background: var(--color-bkg-linear-gradient-2);
 }
 
 </style>
