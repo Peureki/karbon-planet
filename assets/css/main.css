@@ -13,7 +13,6 @@ html {
     margin: 0;
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
-    overflow-x: hidden;
 }
 body {
     margin: 0;
@@ -23,6 +22,9 @@ body {
 button, p, h1, h2, h3, h4, h5, h6, ul, li{
     margin: 0;
     height: auto;
+}
+main{
+    position: relative;
 }
 h1{
     font-family: var(--font-family-konkhmer-sleokchher);
@@ -53,13 +55,47 @@ p{
     line-height: var(--line-height-p);
 }
 a{
+    font-family: var(--font-family-roboto);
+    font-weight: var(--font-weight-p);
+    font-size: var(--font-size-p);
     color: var(--color-text);
+    text-decoration: underline;
     cursor: pointer;
+}
+button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 section{
     position: relative;
     padding-inline: var(--padding-inline-page);
 }
+section:not(.hero){
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-section);
+    padding-block: var(--padding-block-section);
+}
+img.poster{
+    width: var(--w-poster);
+    height: var(--h-poster);
+    position: sticky;
+    top: 7%;
+    border-radius: var(--border-radius);
+}
+@media (max-width: 768px){
+    html,body{
+        overflow-x: hidden;
+    }
+    h2{
+        line-height: 1.3;
+    }
+}
+p.caption{
+    font-size: var(--font-size-p-caption);
+}
+
 .cta-container{
     background-color: var(--color-cta-bkg);
     border-radius: var(--border-radius);
@@ -73,35 +109,27 @@ section{
 .cta-content > img{
     width: var(--font-size-cta);
 }
-.curved-end-section-header{
-    position: absolute;
-    bottom: -30px;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    z-index: 10000001;
-}
-.curved-end-section-header > path{
-    /* fill: var(--color-bkg-nav); */
-}
-.curved-end-section > path {
-    fill: var(--color-bkg);
-}
-.curved-end-section{
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    z-index: 10000000;
-}
+
 
 .title-container{
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: var(--gap-title);
 }
 .title-container svg{
     width: calc(var(--font-size-h2) * 0.65);
 }
+@media (max-width: 768px){
+    /* .title-container{
+        flex-direction: column;
+        align-items: flex-start;
+    } */
+}
+/*
+    * BUTTONS
+*/
+
 
 /*
     * DESCRIPTIONS
@@ -113,6 +141,56 @@ section{
 }
 .faded-description p{
     color: var(--color-faded-text);
+}
+
+/*
+    * SOCIALS
+*/
+.socials-container{
+    display: flex;
+    align-items: center;
+    gap: var(--gap-content);
+}
+.logo{
+    width: var(--w-hero-logo);
+}
+
+/*
+    * TRANSITIONS
+*/
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.page-enter-active,
+.page-leave-active {
+    transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+    opacity: 0;
+    filter: blur(1rem);
+}
+
+
+
+/*
+    * GENERAL CLASSES
+*/
+.flex-row{
+    display: flex;
+    gap: var(--gap-content);
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-content);
 }
 
 /*
@@ -129,6 +207,7 @@ section{
         *
     */
     --color-bkg: #131313;
+    --color-bkg-2: #090a1f;
     --color-bkg-nav: #252525;
     --color-bkg-linear-gradient-1: linear-gradient(180deg, rgba(19,19,19,1) 0%, rgba(9,10,31,1) 100%);
     --color-bkg-linear-gradient-2: linear-gradient(180deg,rgba(9, 10, 31, 1) 0%, rgba(19, 19, 19, 1) 100%);
@@ -137,6 +216,7 @@ section{
     --color-text: #ffffff;
     --color-faded-text: #a8a8a8;
     --color-title: #6CC49B;
+    --color-img-modal: rgba(19, 19, 19, 0.8);
 
 
     /* 
@@ -155,6 +235,7 @@ section{
         *
     */
     --padding-inline-page: clamp(1rem, 3vw, 30rem);
+    --padding-inline-marquee: clamp(1rem, 3vw, 30rem);
     --padding-block-general: clamp(1rem, 1vw, 2rem);
     --padding-block-section: clamp(5.5rem, 10vw, 7.5rem);
     /* For SECTIONS that have abs h2 titles */ 
@@ -177,6 +258,12 @@ section{
         clamp(0.4rem, 0.3vw, 0.85rem)
         var(--padding-inline-page)
     ;
+    --padding-footer: 
+        var(--padding-block-general)
+        var(--padding-inline-page)
+        var(--padding-block-general)
+        var(--padding-inline-page)
+    ;
     --padding-cta: 
         clamp(0.7rem, 0.8vw, 2rem)
         clamp(0.7rem, 1vw, 2.2rem)
@@ -184,15 +271,35 @@ section{
         clamp(0.7rem, 1vw, 2.2rem)
     ;
     /* 
-        * 
+        * BORDERS
+    */
+    --border-radius: clamp(1rem, 2vw, 2rem);
+    --border-radius-circle: 50%;
+    --border-bottom-past-events: 1px solid var(--color-text);
+
+    /* 
         * WIDTHS
-        *
     */
     --w-hero-logo: clamp(11rem, 20vw, 21.8rem);
     --w-nav-logo: clamp(3rem, 1.7vw, 5rem);
+    --w-nav-logo-mobile: clamp(3rem, 20vw, 5rem);
     --w-nav-icon: clamp(1.5rem, 1.5vw, 4.5rem);
+    --w-nav-icon-mobile: clamp(1rem, 10vw, 3rem);
+    --w-footer-logo: clamp(11rem, 25vw, 23rem);
     --w-poster: clamp(10rem, 40vw, 50rem);
+    --w-portrait: clamp(10rem, 35vw, 40rem);
+    --w-past-event: clamp(20rem, 30vw, 41rem);
+    --w-past-event-preview: clamp(5rem, 10vw, 20rem);
     --w-event-description: clamp(21.8rem, 50vw, 100rem);
+    --w-music-description: clamp(22rem, 70vw, 100rem);
+    --w-cta-circle: clamp(2.2rem, 4vw, 6.25rem);
+    --w-cta-arrow: clamp(2rem, 2.5vw, 6.25rem);
+    /* 
+        * HEIGHTS
+    */
+    --h-past-event-poster: clamp(5rem, 20vw, 25rem);
+    /* --h-poster: clamp(5rem, 40vw, 25rem); */
+    --h-poster: fit-content;
     /* 
         * 
         * LINE HEIGHT
@@ -201,27 +308,34 @@ section{
     --line-height-h1: 1;
     --line-height-p: 1.8;
     --line-height-cta: 1;
+    --line-height-music: 0.8;
     /* 
         * WORD SPACING
     */
     --word-spacing-h1: clamp(0.5rem, 1vw, 1.7rem); 
-
+    
     /* 
-        * MISC
+        * TRANSITIONS
     */
-    --border-radius: clamp(1rem, 2vw, 2rem);
+    --transition-all-03-ease: all 0.3s ease; 
 
     /* 
         * FONT SIZES
     */
-    --font-size-h1: clamp(2.5rem, 6vw, 10rem);
-    --font-size-h2: clamp(3.5rem, 5vw, 8rem);
+    --font-size-h1: clamp(3.5rem, 6vw, 10rem);
+    --font-size-h2: clamp(3rem, 5vw, 8rem);
     --font-size-h3: clamp(3rem, 4vw, 7rem);
     --font-size-h4: clamp(2rem, 3.1vw, 6rem);
     --font-size-h5: clamp(1.2rem, 2.8vw, 5rem);
     --font-size-p: clamp(1rem, 1.5vw, 2.18rem);
+    --font-size-p-caption: clamp(1rem, 1vw, 1.5rem);
+    --font-size-past-event-name: clamp(1.2rem, 2vw, 4rem);
     --font-size-cta: clamp(1.2rem, 1.3vw, 4rem);
     --font-size-nav: clamp(1.2rem, 1.3vw, 4rem);
+    --font-size-bkg-title: clamp(3.5rem, 10vw, 8rem);
+    --font-size-music: clamp(3rem, 10vw, 15rem);
+    --font-size-footer-h: clamp(1.8rem, 5vw, 10rem);
+    --font-size-footer-copyright: clamp(0.8rem, 0.8w, 1.8rem);
 
     /* 
         * FONT WEIGHT
@@ -229,6 +343,7 @@ section{
     --font-weight-h1: 600;
     --font-weight-h2: 400;
     --font-weight-h3: 500;
+    --font-weight-footer-h: 300;
     --font-weight-nav: 500;
     --font-weight-cta: 500;
 

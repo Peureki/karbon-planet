@@ -50,6 +50,7 @@ p {
 .nav-cta-content > img{
     width: var(--font-size-cta);
 }
+.nav-cta-container,
 .cta-container{
     width: fit-content;
 }
@@ -58,5 +59,13 @@ p {
     display: flex;
     align-items: center;
     gap: var(--gap-general);
+}
+
+@media (max-width: 768px){
+    .nav-cta-container,
+    .cta-container{
+        display: flex;
+        width: fit-content;
+    }
 }
 </style>

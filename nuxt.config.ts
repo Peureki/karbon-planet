@@ -2,8 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  app: {
+    pageTransition: {name: 'page', mode: 'out-in'}
+  },
   css: ['~/assets/css/main.css'],
-  plugins: ['~/plugins/lenis.client.ts'],
+  plugins: [
+    '~/plugins/lenis.client.ts',
+    '~/plugins/preserve-scroll.client.ts'
+  ],
   components: [
     {
       path: '~/components',
