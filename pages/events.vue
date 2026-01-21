@@ -104,7 +104,7 @@
 </template>
 
 <script setup lang="ts">
-import HeroImg from '~/assets/imgs/other/Rave.png'
+import HeroImg from '~/assets/imgs/other/rave.png'
 
 const { $directus, $readItems } = useNuxtApp()
 
