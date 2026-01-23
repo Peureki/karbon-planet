@@ -44,7 +44,7 @@
                         <!-- POSTER -->
                         <img 
                             class="poster" 
-                            @click="expandPoster(index, event.poster)" :src="`http://localhost:8055/assets/${event.poster}`" :alt="event.name" :title="event.name">
+                            @click="expandPoster(index, event.poster)" :src="`https://karbon-planet-directus-iy7oy.ondigitalocean.app/assets/${event.poster}`" :alt="event.name" :title="event.name">
 
                         <div class="flex-column">
                             <div class="name-and-description">
@@ -60,7 +60,7 @@
                             <!-- COLLAGE -->
                             <div v-if="event.collage && pastEventsCollage && pastEventsToggle[index]" class="collage">
                                 <template v-for="(collageID, collageIndex) in event.collage" :key="collageIndex">
-                                    <img class="img-for-collage" :src="`http://localhost:8055/assets/${getCollageImg(collageID)}`"
+                                    <img class="img-for-collage" :src="`https://karbon-planet-directus-iy7oy.ondigitalocean.app/assets/${getCollageImg(collageID)}`"
                                 </template>
                                 
                             </div>

@@ -113,7 +113,7 @@
         <div class="event-marquee-container">
             <div v-if="pastEvents" class="event-marquee" ref="eventMarquee">
                 <div v-for="(event, index) in pastEvents" class="past-event">
-                    <img class="past-event-poster" :ref="el => pastEventPosters[index] = el as HTMLImageElement" :src="`http://localhost:8055/assets/${event.poster}`" :alt="event.name" :title="event.name">
+                    <img class="past-event-poster" :ref="el => pastEventPosters[index] = el as HTMLImageElement" :src="`https://karbon-planet-directus-iy7oy.ondigitalocean.app/assets/${event.poster}`" :alt="event.name" :title="event.name">
 
                     <div class="past-event-description-container">
                         <h3 class="past-event-name">{{ event.name }}</h3>

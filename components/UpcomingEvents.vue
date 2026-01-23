@@ -17,15 +17,15 @@
         </SectionTitle>
 
         <div v-for="(event, index) in publishedEvents" :key="index" class="event">
-            <img class="poster" :src="`http://localhost:8055/assets/${event.poster}`" :alt="event.name" :title="event.name">
+            <img class="poster" :src="`https://karbon-planet-directus-iy7oy.ondigitalocean.app/assets/${event.poster}`" :alt="event.name" :title="event.name">
             <div class="event-info">
                 <h3>{{ event.name }}</h3>
                 <span class="faded-description">
-                    <p>{{ formatDate(event.startDate) }}</p>
+                    <p>{{ formatDate(event.start_date) }}</p>
                     <p>{{ event.location }}</p>
                 </span>
                 <p class="event-description">{{ event.description }}</p>
-                <CTA :text="event.linkText" :to="event.link" :src="Ticket" :alt="`Get tickets to the event: ${event.name}`" :title="`Get tickets to the event: ${event.name}`"/>
+                <CTA :text="event.link_text" :to="event.link" :src="Ticket" :alt="`Get tickets to the event: ${event.name}`" :title="`Get tickets to the event: ${event.name}`"/>
             </div>
         </div>
     </section>
@@ -50,7 +50,7 @@ const { data: upcomingEvents } = await useAsyncData('upcoming_events', () => {
 // Sort published events by the most recent date
 const publishedEvents = computed(() => {
     return upcomingEvents.value?.sort((a, b) => {
-        return new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+        return new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
     })
 })
 
