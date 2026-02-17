@@ -34,7 +34,7 @@
 
         <div class="past-event-accordion-container">
             <div 
-                v-if="publishedPastEvents" v-for="(event, index) in publishedPastEvents"
+                v-if="sortedEvents" v-for="(event, index) in sortedEvents"
                 :key="index" 
                 class="event"
             >
@@ -44,28 +44,31 @@
                         <!-- POSTER -->
                         <img 
                             class="poster" 
-                            @click="expandPoster(index, event.poster)" :src="`https://karbon-planet-directus-iy7oy.ondigitalocean.app/assets/${event.poster}`" :alt="event.name" :title="event.name">
+                            @click="expandPoster(index, event.poster)" :src="`${directusURLAssets}/${event.poster}`" :alt="event.name" :title="event.name">
 
                         <div class="flex-column">
                             <div class="name-and-description">
                                 <h3>{{ event.name }}</h3>
 
-                                <template v-if="event.long_description && pastEventsToggle[index]">
+                                <template v-if="event.post_event_long_description && pastEventsToggle[index]">
                                     <div class="descriptions">
-                                        <p v-for="block in event.long_description.blocks">{{ block.data.text }}</p>
+                                        <p v-for="block in event.post_event_long_description.blocks">{{ block.data.text }}</p>
                                     </div>
+                                </template>
+
+                                <template v-else>
+                                    <p v-for="(short_description, shortIndex) in event.post_event_short_description.blocks">{{ short_description.data.text }}</p>
                                 </template>
                             </div>
 
                             <!-- COLLAGE -->
                             <div v-if="event.collage && pastEventsCollage && pastEventsToggle[index]" class="collage">
                                 <template v-for="(collageID, collageIndex) in event.collage" :key="collageIndex">
-                                    <img class="img-for-collage" :src="`https://karbon-planet-directus-iy7oy.ondigitalocean.app/assets/${getCollageImg(collageID)}`"
+                                    <img class="img-for-collage" :src="`${directusURLAssets}/${getCollageImg(collageID)}`"
                                 </template>
                                 
                             </div>
                         </div>
-                        
                     </div>
                     
 
@@ -74,7 +77,7 @@
                 
                 <!-- DATE, VIEW MORE BUTTON -->
                 <div class="view-more" :class="flexStart(index)">
-                    <p class="date">{{ formatDate(event.date, true) }}</p>
+                    <p class="date">{{ formatDate(event.start_date) }}</p>
                     <ArrowButton @click="showEventDetails(index)" 
                         :alt="`View more ${event.name} details`" 
                         :title="`View more ${event.name} details`"
@@ -104,6 +107,8 @@
 </template>
 
 <script setup lang="ts">
+import { directusURL, directusURLAssets } from '~/plugins/directus'
+
 import HeroImg from '~/assets/imgs/other/rave.png'
 
 const { $directus, $readItems } = useNuxtApp()
@@ -112,13 +117,31 @@ const { data: pastEvents } = await useAsyncData('past_events', () => {
   return $directus.request($readItems('past_events'))
 }, { lazy: true })
 
-const { data: pastEventsCollage } = await useAsyncData('past_events_files', () => {
-  return $directus.request($readItems('past_events_files'))
+const { data: pastEventsCollage } = await useAsyncData('events_files', () => {
+  return $directus.request($readItems('events_files'))
 }, { lazy: true })
 
 const publishedPastEvents = computed(() => {
     return pastEvents.value?.sort((a, b) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime()
+    })
+})
+
+const { data: events } = await useAsyncData('events', () => {
+  return $directus.request($readItems('events', {
+    // Filter out any !published events (archived or removed)
+    filter: {
+        status: {
+            _eq: 'published'
+        }
+    }
+  }))
+}, { lazy: true })
+
+// Sort published events by the most recent date
+const sortedEvents = computed(() => {
+    return events.value?.sort((a, b) => {
+        return new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
     })
 })
 
@@ -236,7 +259,7 @@ img.poster{
 }
 img.img-for-collage{
     width: var(--w-past-event);
-    border-radius: var(--border-radius);
+    object-fit: contain;
 }
 .collage{
     display: flex;

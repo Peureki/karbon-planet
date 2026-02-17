@@ -1,21 +1,15 @@
-export const formatDate = (targetDate: string, noTime?: boolean) => {
-    const date = new Date(targetDate);
+export const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
 
-    const options: Intl.DateTimeFormatOptions = {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-        ...(noTime ? {} : {
-            hour: 'numeric',
-            hour12: true,
-            timeZone: 'America/Chicago',
-            timeZoneName: 'short',
-        })
-        
+    // Use Intl.DateTimeFormat for human-readable month/day/year
+    const options: Intl.DateTimeFormatOptions = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
     };
+    return new Intl.DateTimeFormat('en-US', options).format(date);
 
-    const formatter = new Intl.DateTimeFormat('en-US', options);
-    return formatter.format(date); 
+
 }
 
 export const extractYouTubeID = (urlLink: string) => {

@@ -288,7 +288,7 @@ p.caption{
     --w-footer-logo: clamp(11rem, 25vw, 23rem);
     --w-poster: clamp(10rem, 40vw, 50rem);
     --w-portrait: clamp(10rem, 35vw, 40rem);
-    --w-past-event: clamp(20rem, 30vw, 41rem);
+    --w-past-event: clamp(10rem, 20vw, 30rem);
     --w-past-event-preview: clamp(5rem, 10vw, 20rem);
     --w-event-description: clamp(21.8rem, 50vw, 100rem);
     --w-music-description: clamp(22rem, 70vw, 100rem);

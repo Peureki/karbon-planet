@@ -16,45 +16,70 @@
             </template>
         </SectionTitle>
 
-        <div v-for="(event, index) in publishedEvents" :key="index" class="event">
-            <img class="poster" :src="`https://karbon-planet-directus-iy7oy.ondigitalocean.app/assets/${event.poster}`" :alt="event.name" :title="event.name">
-            <div class="event-info">
-                <h3>{{ event.name }}</h3>
-                <span class="faded-description">
-                    <p>{{ formatDate(event.start_date) }}</p>
-                    <p>{{ event.location }}</p>
-                </span>
-                <p class="event-description">{{ event.description }}</p>
-                <CTA :text="event.link_text" :to="event.link" :src="Ticket" :alt="`Get tickets to the event: ${event.name}`" :title="`Get tickets to the event: ${event.name}`"/>
+        <template v-for="(event, index) in sortedEvents" :key="index" >
+            <div v-if="isEventCurrent(event)" class="event">
+                <img class="poster" :src="`${directusURLAssets}${event.poster}`" :alt="event.name" :title="event.name">
+                <div class="event-info">
+                    <h3>{{ event.name }}</h3>
+                    <span class="faded-description">
+                        <p>{{ formatDate(event.start_date) }}</p>
+                        <p>{{ event.location }}</p>
+                    </span>
+                    <p class="event-description">{{ event.description }}</p>
+                    <CTA :text="event.cta_link_text" :to="event.cta_link" :src="Ticket" :alt="`Get tickets to the event: ${event.cta_link_text}`" :title="`Get tickets to the event: ${event.cta_link_text}`"/>
+                </div>
             </div>
-        </div>
+                    
+        </template>
+
+        <h3 v-if="eventCounter == 0">TUNE IN FOR MORE EVENTS SOON</h3>
     </section>
 </template>
 
 <script setup lang="ts">
 import Ticket from '~/assets/imgs/svgs/ticket.svg'
+import { directusURL, directusURLAssets } from '~/plugins/directus'
 
 const { $directus, $readItems } = useNuxtApp()
 
-const { data: upcomingEvents } = await useAsyncData('upcoming_events', () => {
-  return $directus.request($readItems('upcoming_events', {
+// Track if there's no events
+// If == 0, show "TUNE IN FOR EVENTS"
+const eventCounter = ref<number>(0); 
+
+const { data: events } = await useAsyncData('events', () => {
+  return $directus.request($readItems('events', {
     // Filter out any !published events (archived or removed)
     filter: {
         status: {
             _eq: 'published'
-        }
+        },
     }
   }))
 }, { lazy: true })
 
 // Sort published events by the most recent date
-const publishedEvents = computed(() => {
-    return upcomingEvents.value?.sort((a, b) => {
+const sortedEvents = computed(() => {
+    return events.value?.sort((a, b) => {
         return new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
     })
 })
 
-console.log('published events: ', publishedEvents.value)
+// For Upcoming Events
+// Is the event past or upcoming? 
+// If in the past: dont' show
+// If upcoming: show
+const isEventCurrent = (event: any):boolean => {
+    const eventDate = new Date(event.start_date)
+    const today = new Date(); 
+
+    if (eventDate > today)
+        eventCounter.value++
+
+    return eventDate > today; 
+}
+
+
+console.log('events: ', events.value);
 
 
 

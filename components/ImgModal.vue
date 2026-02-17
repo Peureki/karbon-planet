@@ -1,11 +1,13 @@
 <template>
     <div class="img-modal-container" @click="$emit('someEvent')">
-        <img class="modal-img" v-if="image" :src="`http://localhost:8055/assets/${image}`"
+        <img class="modal-img" v-if="image" :src="`${directusURLAssets}/${image}`"
     </div>
 
 </template>
 
 <script setup lang="ts">
+import { directusURL, directusURLAssets } from '~/plugins/directus'
+
 interface Props{
     image?: string
 }

@@ -1,7 +1,5 @@
 <template>
 <main>
-
-    
     <!--
         *
         * HERO SECTION
@@ -111,14 +109,15 @@
             *
         -->
         <div class="event-marquee-container">
-            <div v-if="pastEvents" class="event-marquee" ref="eventMarquee">
-                <div v-for="(event, index) in pastEvents" class="past-event">
-                    <img class="past-event-poster" :ref="el => pastEventPosters[index] = el as HTMLImageElement" :src="`https://karbon-planet-directus-iy7oy.ondigitalocean.app/assets/${event.poster}`" :alt="event.name" :title="event.name">
+            <div v-if="sortedEvents" class="event-marquee" ref="eventMarquee">
+                <div v-for="(event, index) in sortedEvents" class="past-event">
+                    <img class="past-event-poster" :ref="el => pastEventPosters[index] = el as HTMLImageElement" :src="`${directusURLAssets}/${event.poster}`" :alt="event.name" :title="event.name">
 
                     <div class="past-event-description-container">
                         <h3 class="past-event-name">{{ event.name }}</h3>
                         <p class=""></p>
-                        <p>{{ event.short_description }}</p>
+                        <p v-for="(short_description, shortIndex) in event.post_event_short_description.blocks">{{ short_description.data.text }}</p>
+                        <NuxtLink to="/events">More Info</NuxtLink>
                     </div>
                 </div>
             </div>
@@ -285,6 +284,8 @@
 </template>
 
 <script setup lang="ts">
+import { directusURL, directusURLAssets } from '~/plugins/directus'
+
 // KARBON PLANET
 import DeadDog33 from '~/assets/imgs/deaddog/Deaddog 33.jpg'
 import KarbonPlanetLogo from '~/assets/imgs/logos/Karbon Planet-FullW.png'
@@ -327,13 +328,23 @@ const radioJaivesRightArrow = ref<boolean>(true),
 // Default music track index to be displayed 
 const trackIndex = ref<number>(0); 
 
-const { data: upcomingEvents } = await useAsyncData('upcoming_events', () => {
-  return $directus.request($readItems('upcoming_events'))
+const { data: events } = await useAsyncData('events', () => {
+  return $directus.request($readItems('events', {
+    // Filter out any !published events (archived or removed)
+    filter: {
+        status: {
+            _eq: 'published'
+        }
+    }
+  }))
 }, { lazy: true })
 
-const { data: pastEvents } = await useAsyncData('past_events', () => {
-  return $directus.request($readItems('past_events'))
-}, { lazy: true })
+// Sort published events by the most recent date
+const sortedEvents = computed(() => {
+    return events.value?.sort((a, b) => {
+        return new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+    })
+})
 
 const { data: collage } = await useAsyncData('past_events_files', () => {
   return $directus.request($readItems('past_events_files'))
@@ -351,8 +362,6 @@ const { data: aboutMe } = await useAsyncData('about_me', () => {
   return $directus.request($readItems('about_me'))
 }, { lazy: true })
 
-
-console.log('upcoming events: ', upcomingEvents.value);
 // test
 
 const isNotScrolling = ref<boolean>(true);
