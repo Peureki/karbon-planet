@@ -35,6 +35,7 @@
                 text="EDM Events"
             />
         </div>
+        
     </section>  
 
     <!--
@@ -115,9 +116,17 @@
 
                     <div class="past-event-description-container">
                         <h3 class="past-event-name">{{ event.name }}</h3>
+                        <p class="caption">{{ event.karbon_what }}</p>
                         <p class=""></p>
                         <p v-for="(short_description, shortIndex) in event.post_event_short_description.blocks">{{ short_description.data.text }}</p>
-                        <NuxtLink to="/events">More Info</NuxtLink>
+                        <NuxtLink 
+                            :to="{
+                                path: '/events',
+                                hash: `#${slugify(event.name)}`
+                            }"
+                        >
+                            More Info
+                        </NuxtLink>
                     </div>
                 </div>
             </div>
@@ -241,8 +250,21 @@
     -->
     <section class="radiojaives-details">
         <div class="details-container">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            <template v-if="musicSection">
+                <p v-for="description in musicSection[0].description.blocks">{{ description.data.text }}</p>
+
+                
+            </template>
+            <CTA
+                :src="SoundCloud"
+                alt="SoundCloud"
+                title="SoundCloud"
+                text="SoundCloud"
+                to="https://soundcloud.com/jaives"
+            />
         </div>
+
+        
     </section>
 
     <!--
@@ -252,7 +274,7 @@
     -->
     <section class="about">
         <div class="two-col-container">
-            <img class="poster" :src="Xavier2" alt="Xavier" title="Xavier">
+            <img v-if="aboutMe" class="poster" :src="`${directusURLAssets}/${aboutMe[0].portrait}`" alt="Xavier" title="Xavier">
 
 
             <div class="content-container">
@@ -287,11 +309,11 @@
 import { directusURL, directusURLAssets } from '~/plugins/directus'
 
 // KARBON PLANET
-import DeadDog33 from '~/assets/imgs/deaddog/Deaddog 33.jpg'
+import DeadDog33 from '~/assets/imgs/karbon-planet/Moondough 3.webp'
 import KarbonPlanetLogo from '~/assets/imgs/logos/Karbon Planet-FullW.png'
 
 // KARBON KANDI
-import KarbonKandiEvent from '~/assets/imgs/karbon-kandi/A55A3101.jpg'
+import KarbonKandiEvent from '~/assets/imgs/karbon-kandi/A55A3101.webp'
 import KarbonKandiLogo from '~/assets/imgs/karbon-kandi/Karbon Kandi White Logo.png'
 
 // CTA
@@ -300,6 +322,7 @@ import Flower from '~/assets/imgs/svgs/flower.svg'
 import Ticket from '~/assets/imgs/svgs/ticket.svg'
 import RockOn from '~/assets/imgs/svgs/rock-on.svg'
 import Panda from '~/assets/imgs/svgs/panda.svg'
+import SoundCloud from '~/assets/imgs/svgs/soundcloud.svg'
 
 // UPCOMING EVENTS
 import Eyes from '~/assets/imgs/svgs/eyes.svg'
@@ -314,7 +337,7 @@ import Xavier2 from '~/assets/imgs/portraits/xavier-2.jpg'
 // MOBILE HERO IMGS
 import Hero1 from '~/assets/imgs/hero/hero-1.jpg'
 
-const { $directus, $readItems } = useNuxtApp()
+const { $directus, $readItems, $readSingleton } = useNuxtApp()
 
 const eventMarquee = ref<HTMLDivElement | null>(null),
     pastEventPosters = ref<(HTMLImageElement | null)[]>([]);
@@ -362,7 +385,10 @@ const { data: aboutMe } = await useAsyncData('about_me', () => {
   return $directus.request($readItems('about_me'))
 }, { lazy: true })
 
-// test
+const { data: musicSection } = await useAsyncData('music_section', () => {
+  return $directus.request($readItems('music_section'))
+}, { lazy: true })
+
 
 const isNotScrolling = ref<boolean>(true);
 
@@ -849,7 +875,9 @@ section.radiojaives-details{
 }
 .details-container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: var(--gap-content);
 }
 .details-container > p { 
     width: var(--w-music-description);
@@ -875,6 +903,9 @@ section.radiojaives-details{
 @media (max-width: 768px){
     .two-col-container{
         flex-direction: column;
+    }
+    .about > .two-col-container > img.poster{
+        width: 100%;
     }
 }
 

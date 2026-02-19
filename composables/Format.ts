@@ -18,3 +18,14 @@ export const extractYouTubeID = (urlLink: string) => {
 }
 
 export const useOpenMobileNav = () => useState<boolean>('openMobileNav', () => false);
+
+// For div IDs that uses event.name 
+// Since event names have caps and spaces, make them work for the URL
+// => This allows users in the home page to directly go to the specific events in the /events page
+// ex: HARDCORE HEARTBREAK => hardcore-heartbreak
+export const slugify = (text: string) => {
+    return text
+        .toLowerCase()
+        .replace(/\s+/g, '-')        // spaces → dashes
+        .replace(/[^\w-]+/g, '')     // remove special chars
+}

@@ -1,7 +1,7 @@
 <template>
     <footer>
         <div class="contacts">
-            <p><a href="tel:6301234567">630-123-4567</a></p>
+            <!-- <p><a href="tel:6301234567">630-123-4567</a></p> -->
 
             <p><a href="mailto:Xavier.Fraire@gmail.com">Xavier.Fraire@gmail.com</a></p>
 

@@ -6,7 +6,7 @@
 
             <div class="contact-info-container">
                 <p>Xavier.Fraire@gmail.com</p>
-                <p>630-123-4567</p>
+                <!-- <p>630-123-4567</p> -->
 
                 <div class="socials-container">
                     <a href="https://www.instagram.com/karbon_planet" target="_blank">

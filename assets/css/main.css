@@ -94,6 +94,7 @@ img.poster{
 }
 p.caption{
     font-size: var(--font-size-p-caption);
+    font-style: italic;
 }
 
 .cta-container{

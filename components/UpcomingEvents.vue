@@ -22,11 +22,17 @@
                 <div class="event-info">
                     <h3>{{ event.name }}</h3>
                     <span class="faded-description">
+                        <p class="caption">{{ event.karbon_what }}</p>
                         <p>{{ formatDate(event.start_date) }}</p>
                         <p>{{ event.location }}</p>
                     </span>
-                    <p class="event-description">{{ event.description }}</p>
+                    <!-- <p class="event-description">{{ event.description }}</p> -->
                     <CTA :text="event.cta_link_text" :to="event.cta_link" :src="Ticket" :alt="`Get tickets to the event: ${event.cta_link_text}`" :title="`Get tickets to the event: ${event.cta_link_text}`"/>
+
+                    <template v-if="event.description">
+                        <p class="event-description" v-for="description in event.description.blocks">{{ description.data.text }}</p>
+                    </template>
+                    
                 </div>
             </div>
                     

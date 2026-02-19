@@ -37,6 +37,7 @@
                 v-if="sortedEvents" v-for="(event, index) in sortedEvents"
                 :key="index" 
                 class="event"
+                :id="slugify(event.name)"
             >
                 <!-- EVENT PREVIEW POSTER, DESCRIPTION -->
                 <div class="event-details-container" :class="flexStart(index)">
@@ -49,6 +50,7 @@
                         <div class="flex-column">
                             <div class="name-and-description">
                                 <h3>{{ event.name }}</h3>
+                                <p class="caption">{{ event.karbon_what }}</p>
 
                                 <template v-if="event.post_event_long_description && pastEventsToggle[index]">
                                     <div class="descriptions">
@@ -109,7 +111,7 @@
 <script setup lang="ts">
 import { directusURL, directusURLAssets } from '~/plugins/directus'
 
-import HeroImg from '~/assets/imgs/other/rave.png'
+import HeroImg from '~/assets/imgs/other/rave.webp'
 
 const { $directus, $readItems } = useNuxtApp()
 
