@@ -26,12 +26,16 @@
                         <p>{{ formatDate(event.start_date) }}</p>
                         <p>{{ event.location }}</p>
                     </span>
-                    <!-- <p class="event-description">{{ event.description }}</p> -->
-                    <CTA :text="event.cta_link_text" :to="event.cta_link" :src="Ticket" :alt="`Get tickets to the event: ${event.cta_link_text}`" :title="`Get tickets to the event: ${event.cta_link_text}`"/>
 
                     <template v-if="event.description">
                         <p class="event-description" v-for="description in event.description.blocks">{{ description.data.text }}</p>
                     </template>
+
+                    <p class="caption">Art by: <a class="caption" :href="`${event.artist_link}`" target="_blank">{{ event.artist_name }}</a></p>
+
+                    <CTA :text="event.cta_link_text" :to="event.cta_link" :src="Ticket" :alt="`Get tickets to the event: ${event.cta_link_text}`" :title="`Get tickets to the event: ${event.cta_link_text}`"/>
+
+                    
                     
                 </div>
             </div>

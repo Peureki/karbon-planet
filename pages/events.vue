@@ -51,6 +51,7 @@
                             <div class="name-and-description">
                                 <h3>{{ event.name }}</h3>
                                 <p class="caption">{{ event.karbon_what }}</p>
+                                <p class="caption">Art by: <a class="caption" :href="`${event.artist_link}`" target="_blank">{{ event.artist_name }}</a></p>
 
                                 <template v-if="event.post_event_long_description && pastEventsToggle[index]">
                                     <div class="descriptions">

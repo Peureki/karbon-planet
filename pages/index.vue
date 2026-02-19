@@ -119,6 +119,8 @@
                         <p class="caption">{{ event.karbon_what }}</p>
                         <p class=""></p>
                         <p v-for="(short_description, shortIndex) in event.post_event_short_description.blocks">{{ short_description.data.text }}</p>
+
+                        <p class="caption">Art by: <a class="caption" :href="`${event.artist_link}`" target="_blank">{{ event.artist_name }}</a></p>
                         <NuxtLink 
                             :to="{
                                 path: '/events',

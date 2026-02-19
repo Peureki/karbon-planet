@@ -92,7 +92,7 @@ img.poster{
         line-height: 1.3;
     }
 }
-p.caption{
+p.caption, a.caption{
     font-size: var(--font-size-p-caption);
     font-style: italic;
 }
