@@ -42,7 +42,7 @@
                     
         </template>
 
-        <h3 v-if="eventCounter == 0">TUNE IN FOR MORE EVENTS SOON</h3>
+        <h3 v-if="eventCounter == 0">MORE COMING SOON...</h3>
     </section>
 </template>
 
