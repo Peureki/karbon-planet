@@ -113,6 +113,22 @@
 import { directusURL, directusURLAssets } from '~/plugins/directus'
 
 import HeroImg from '~/assets/imgs/other/rave.webp'
+import KarbonPlanetLogo from '~/assets/imgs/logos/Karbon Planet-FullW.png'
+
+/*
+    *
+    *
+    * SEO STUFF
+    * 
+    * 
+*/
+useSeoMeta({
+    title: 'Events | Upcoming & Past Events',
+    ogTitle: 'Events | Upcoming & Past Events',
+    description: 'Browse incoming and past events hosted by Karbon Planet or Karbon Kandi.',
+    ogDescription: 'Browse incoming and past events hosted by Karbon Planet or Karbon Kandi.',
+    ogImage: KarbonPlanetLogo,
+})
 
 const { $directus, $readItems } = useNuxtApp()
 

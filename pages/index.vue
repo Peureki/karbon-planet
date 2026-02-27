@@ -46,7 +46,7 @@
     -->
     <section class="hero-mobile">
         <MobileMarquee class="mobile-marquee"/>
-        <img class="bkg" :src="Hero1">
+        <img class="bkg" :src="Hero1" alt="Antillion event" title="Antillion event">
         
         <div class="hero-mobile-content">
             <!-- DISPLAY BOTH LOGOS -->
@@ -337,7 +337,22 @@ import Xavier1 from '~/assets/imgs/portraits/xavier-1.png'
 import Xavier2 from '~/assets/imgs/portraits/xavier-2.jpg'
 
 // MOBILE HERO IMGS
-import Hero1 from '~/assets/imgs/hero/hero-1.jpg'
+import Hero1 from '~/assets/imgs/hero/hero-1.webp'
+
+/*
+    *
+    *
+    * SEO STUFF
+    * 
+    * 
+*/
+useSeoMeta({
+    title: 'Karbon Planet | Live Events Promoter',
+    ogTitle: 'Karbon Planet | Live Events Promoter',
+    description: 'Karbon Planet produces live concerts and music events, including Karbon Kandi — live concerts and events experiences more catered EDM and live DJ sets.',
+    ogDescription: 'Karbon Planet produces live concerts and music events, including Karbon Kandi — live concerts and events experiences more catered EDM and live DJ sets.',
+    ogImage: KarbonPlanetLogo,
+})
 
 const { $directus, $readItems, $readSingleton } = useNuxtApp()
 

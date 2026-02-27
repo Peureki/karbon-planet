@@ -47,6 +47,25 @@ import KarbonKandi from '~/assets/imgs/logos/Karbon Kandi White Logo.png'
 
 import Xavier from '~/assets/imgs/portraits/xavier-1.png'
 
+import KarbonPlanetLogo from '~/assets/imgs/logos/Karbon Planet-FullW.png'
+
+/*
+    *
+    *
+    * SEO STUFF
+    * 
+    * 
+*/
+useSeoMeta({
+    title: 'Contact Karbon Planet',
+    ogTitle: 'Contact Karbon Planet',
+    description: 'Contact Karbon Planet for booking inquires, partnerships, and event hosting',
+    ogDescription: 'Contact Karbon Planet for booking inquires, partnerships, and event hosting',
+    ogImage: KarbonPlanetLogo,
+})
+
+
+
 </script>
 
 <style scoped>

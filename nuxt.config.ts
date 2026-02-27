@@ -3,7 +3,18 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   app: {
-    pageTransition: {name: 'page', mode: 'out-in'}
+    pageTransition: {name: 'page', mode: 'out-in'},
+    head: {
+      charset: 'utf-16',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+      title: 'Karbon Planet',
+      htmlAttrs: {
+        lang: 'en',
+      },
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.png'},
+      ]
+    }
   },
   css: ['~/assets/css/main.css'],
   plugins: [
