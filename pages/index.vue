@@ -15,7 +15,7 @@
             <CTA class="cta" 
                 :src="Planet"
                 :nav="true" 
-                to="contact"
+                to="events"
                 alt="Karbon Planet"
                 title="Karbon Planet"
                 text="Rock Events"
@@ -28,7 +28,7 @@
 
             <CTA class="cta" 
                 :nav="true"
-                to="contact"
+                to="events"
                 :src="Flower"
                 alt="Karbon Kandi"
                 title="Karbon Kandi"
