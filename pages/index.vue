@@ -291,7 +291,7 @@
                     </template>
                 </SectionTitle>
 
-                <p v-if="aboutMe" v-for="description in aboutMe[0].description.blocks">{{ description.data.text }}</p>
+                <p v-if="aboutMe" v-for="description in aboutMe[0].description.blocks" v-html="description.data.text"></p>
 
                 <CTA
                     :src="RockOn"
