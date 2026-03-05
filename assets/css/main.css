@@ -96,6 +96,9 @@ p.caption, a.caption{
     font-size: var(--font-size-p-caption);
     font-style: italic;
 }
+a.more-info{
+    color: var(--color-cta);
+}
 
 .cta-container{
     background-color: var(--color-cta-bkg);

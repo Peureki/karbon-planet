@@ -55,12 +55,12 @@
 
                                 <template v-if="event.post_event_long_description && pastEventsToggle[index]">
                                     <div class="descriptions">
-                                        <p v-for="block in event.post_event_long_description.blocks">{{ block.data.text }}</p>
+                                        <p v-for="block in event.post_event_long_description.blocks" v-html="block.data.text"></p>
                                     </div>
                                 </template>
 
                                 <template v-else>
-                                    <p v-for="(short_description, shortIndex) in event.post_event_short_description.blocks">{{ short_description.data.text }}</p>
+                                    <p v-for="(short_description, shortIndex) in event.post_event_short_description.blocks" v-html="short_description.data.text"></p>
                                 </template>
                             </div>
 
