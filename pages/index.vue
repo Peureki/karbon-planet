@@ -253,8 +253,8 @@
     -->
     <section class="radiojaives-details">
         <div class="details-container">
-            <template v-if="musicSection">
-                <p v-for="description in musicSection[0].description.blocks">{{ description.data.text }}</p>
+            <template v-if="musicSection?.[0]?.description?.blocks">
+                <p v-for="description in musicSection[0].description.blocks" v-html="description.data.text"></p>
 
                 
             </template>
