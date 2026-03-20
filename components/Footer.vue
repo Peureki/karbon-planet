@@ -3,7 +3,7 @@
         <div class="contacts">
             <!-- <p><a href="tel:6301234567">630-123-4567</a></p> -->
 
-            <p><a href="mailto:Xavier.Fraire@gmail.com">Xavier.Fraire@gmail.com</a></p>
+            <p><a href="mailto:karbonplanet@gmail.com">karbonplanet@gmail.com</a></p>
 
             <div class="socials-container">
                 <a href="https://www.instagram.com/karbon_planet" target="_blank">

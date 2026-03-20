@@ -5,7 +5,7 @@
             <h1 id="title">Contact</h1>
 
             <div class="contact-info-container">
-                <p>Xavier.Fraire@gmail.com</p>
+                <p><a href="mailto:karbonplanet@gmail.com">karbonplanet@gmail.com</a></p>
                 <!-- <p>630-123-4567</p> -->
 
                 <div class="socials-container">
