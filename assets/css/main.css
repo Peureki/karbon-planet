@@ -284,7 +284,7 @@ a.more-info{
     /* 
         * WIDTHS
     */
-    --w-hero-logo: clamp(11rem, 20vw, 21.8rem);
+    --w-hero-logo: clamp(7rem, 25vw, 21.8rem);
     --w-nav-logo: clamp(3rem, 1.7vw, 5rem);
     --w-nav-logo-mobile: clamp(3rem, 20vw, 5rem);
     --w-nav-icon: clamp(1.5rem, 1.5vw, 4.5rem);
